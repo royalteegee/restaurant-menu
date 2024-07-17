@@ -13,7 +13,7 @@ A flask app that shows the different restaurants and dish menus they have with f
     `[name of environment you want to use]\Scripts\activate`
 - Install dependecies and packages in requirements.txt file   
     `pip install -r requirements.txt`
-- Create a .env file and include the environment variables  
+- Create a .env file and include the environment variables. Add a SECRET_KEY    
     `DB_URI=sqlite:///restaurant-menu.db`  
     `HOST=0.0.0.0`  
     `PORT=5000`  
