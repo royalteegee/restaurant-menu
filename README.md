@@ -23,4 +23,5 @@ A flask app that shows the different restaurants and dish menus they have with f
     `python server.py`
 - Populate the restaurant-menu.db with the shellrun.py script  
     `python shellrun.py`
-- Open your browser and go to `localhost:5000` to view your flask application
+- Open your browser and go to `localhost:5000` to view your flask application.   
+- Go to `localhost:5000/healthcheck` to see status of application
