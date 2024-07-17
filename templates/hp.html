@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Restaurants</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hp.css') }}"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h2>RESTAURANTS IN PORT HARCOURT</h2>
+        <div class="restaurants">
+            {% for restaurant in list %}
+                <div class="restaurant-box">
+                    <a href="{{ url_for('restaurantMenu', restaurant_id=restaurant.id) }}">
+                        <h3>{{ restaurant.name }}</h3>
+                    </a>
+                    <p><span> ↪️Live Location :</span> {{ restaurant.location }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* style.css */
+
+.nav {
+    width: 100%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.nav a {
+    display: block;
+    color: #007BFF;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    background-color: #007BFF;
+    color: black;
+}
+/* Container */
+.container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Header styling */
+h2 {
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Flash messages */
+.messages {
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+.messages li {
+    margin-bottom: 5px;
+}
+
+/* Menu items styling */
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background: #fafafa;
+}
+
+.menu-item .left-column {
+    flex: 1;
+    padding-right: 20px; /* Added padding to create margin between columns */
+}
+
+.menu-item .right-column {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item h3 {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.menu-item p {
+    margin-bottom: 10px;
+}
+
+.menu-item .price {
+    font-size: 1.2em;
+    color: #888;
+}
+
+/* Links styling */
+a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Button styling */
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 100px; /* Set fixed width for buttons */
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .right-column {
+        text-align: left;
+        margin-top: 10px;
+        flex-direction: row;
+    }
+
+    .menu-item h3 {
+        font-size: 1.2em;
+    }
+}

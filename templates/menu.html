@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- Added link to CSS file -->
+</head>
+<body>
+    <div class="nav"><a href="{{ url_for('allRestaurant')}}">Home</a></div>
+    <div class="container"> <!-- Added container class for better layout -->
+        <h1>{{ restaurant.name }}</h1>
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="messages"> <!-- Added messages class for styling -->
+                        {% for message in messages %}
+                            <span class="alert">{{ message}}</span>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <p><a href="{{ url_for('newMenu', restaurant_id=restaurant.id) }}" class="button">Add Menu</a></p> <!-- Added button class for styling -->
+        <div>
+        {% for i in items %}
+            <div class="menu-item"> <!-- Added menu-item class for styling -->
+                <div class="left-column"> <!-- Added left-column class for styling -->
+                    <h3>{{ i.name }}</h3>
+                    <p>{{ i.description }}</p>
+                    <p class="price">#{{ i.price }}</p> <!-- Moved price to the left column -->
+                    <h6>{{ i.status }}</h6>
+                </div>
+                <div class="right-column"> <!-- Added right-column class for styling -->
+                    <p><a href="{{ url_for('editMenu', restaurant_id=restaurant.id, menu_id=i.id) }}" class="button">Edit</a></p>
+                    <p><a href="{{ url_for('delMenu', restaurant_id=restaurant.id, menu_id=i.id) }}" class="button">Delete</a></p>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/flashtimeout.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="nav"><a href="{{ url_for('allRestaurant')}}">Home</a></div>
+    <h1> Edit Menu Item </h1>
+    <div>
+        <form action="{{ url_for('editMenu', menu_id=menu_id, restaurant_id=restaurant_id) }}" method="post">
+            <dl>
+                <dt>Name:</dt>
+                    <dd><input type ='text' size='30' name='name' placeholder = '{{editedDish.name }}'></dd>
+                <dt>Description:</dt>
+                    <dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{editedDish.description }}'></textarea></dd>
+                <dt>Price:</dt>
+                    <dd><input type = 'text' size = '8' name='price' placeholder = '{{editedDish.price}}'></dd>
+                <dt>Course:</dt>
+            </dl>
+                <input type='submit' value='Edit'>
+            <a href="{{ url_for('restaurantMenu', restaurant_id=restaurant_id)}}">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
