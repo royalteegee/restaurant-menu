@@ -10,6 +10,7 @@ from database_setup import Base, Restaurant, MenuItem
 
 engine = create_engine(os.getenv('DB_URI'))
 Base.metadata.bind = engine
+Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
