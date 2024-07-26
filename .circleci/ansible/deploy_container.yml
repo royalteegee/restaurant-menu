@@ -1,0 +1,50 @@
+---
+- name: Deploy updated Docker container from ECR
+  hosts: api-server
+  become: yes
+
+  vars:
+    container_name: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test
+    ecr_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test
+    ecr_image_tag: latest
+    aws_region: us-east-1
+
+  tasks:
+    - name: Stop the running container
+      docker_container:
+        name: "{{ container_name }}"
+        state: stopped
+      ignore_errors: yes
+
+    - name: Delete the container
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove the Docker image
+      docker_image:
+        name: "{{ ecr_repository }}:{{ ecr_image_tag }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Login to Amazon ECR
+      command: >
+        aws ecr get-login-password --region {{ aws_region }} |
+        docker login --username AWS --password-stdin {{ ecr_repository }}
+      register: login_result
+      changed_when: "'Login Succeeded' in login_result.stdout"
+
+    - name: Pull the latest image from ECR
+      docker_image:
+        name: "{{ ecr_repository }}"
+        tag: "{{ ecr_image_tag }}"
+        source: pull
+
+    - name: Run the new container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ ecr_repository }}:{{ ecr_image_tag }}"
+        state: started
+        ports:
+          - "80:5000"

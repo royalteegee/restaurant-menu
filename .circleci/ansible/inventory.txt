@@ -1,0 +1,2 @@
+[api-server]
+[54.224.105.208] ansible_ssh_user='ubuntu'
