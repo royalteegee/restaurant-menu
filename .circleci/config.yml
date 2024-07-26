@@ -46,8 +46,7 @@ jobs:
           name: Login build and push to ECR
           command: |
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382803030.dkr.ecr.us-east-1.amazonaws.com
-            docker build -t cicd-test .
-            docker tag cicd-test:latest 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
+            docker build -t 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest . 
             docker push 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
 
   Run-image-as-Container:
