@@ -45,7 +45,7 @@ jobs:
       - install_docker
       - install_awscli
       - run
-          name: Login, build, and push to ECR
+          name: Login build and push to ECR
           command: |
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382803030.dkr.ecr.us-east-1.amazonaws.com
             docker build -t cicd-test .
