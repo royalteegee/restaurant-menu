@@ -33,7 +33,7 @@ commands:
 jobs:
   build-image-and-push-to-ecr:
     machine: 
-      image: ubuntu-2204:2022.04.2
+      image: current
     environment:
       DB_URI: $DB_URI
       PORT: $PORT
@@ -41,7 +41,6 @@ jobs:
       SECRET_KEY: $SECRET_KEY
     steps:
       - checkout 
-      - install_docker
       - install_awscli
       - run:
           name: Login build and push to ECR
@@ -53,11 +52,10 @@ jobs:
 
   Run-image-as-Container:
     machine:
-      image: ubuntu-2204:2022.04.2
+      image: current
     steps:
       - checkout
       - install_awscli
-      - install_docker
       - add_ssh_keys:
           fingerprints:
             - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
