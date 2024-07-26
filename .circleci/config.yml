@@ -41,7 +41,6 @@ jobs:
       SECRET_KEY: $SECRET_KEY
     steps:
       - checkout 
-      - install_awscli
       - run:
           name: Login build and push to ECR
           command: |
@@ -55,7 +54,6 @@ jobs:
       image: ubuntu-2204:2024.05.1
     steps:
       - checkout
-      - install_awscli
       - add_ssh_keys:
           fingerprints:
             - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
