@@ -44,7 +44,7 @@ jobs:
       - checkout 
       - install_docker
       - install_awscli
-      - run
+      - run:
           name: Login build and push to ECR
           command: |
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382803030.dkr.ecr.us-east-1.amazonaws.com
@@ -63,11 +63,11 @@ jobs:
               - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
             name: test-key.pem
             private_key: $YOUR_PRIVATE_KEY
-        - run
+        - run:
             name: Pull image from ECR
             command: |
               docker pull 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
-        - run
+        - run:
             name: Deploy Container
             command: |
               cat .circleci/ansible/inventory.txt
