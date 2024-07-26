@@ -75,10 +75,10 @@ jobs:
             ansible-playbook deploy_container.yml
 
 workflows:
-  default:
-    build-and-deploy:
-      jobs:
-        - build-image-and-push-to-ecr
-        - Run-image-as-Container:
-            requires:
-              - build-image-and-push-to-ecr
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-image-and-push-to-ecr
+      - Run-image-as-Container:
+          requires:
+            - build-image-and-push-to-ecr
