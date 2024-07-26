@@ -47,6 +47,7 @@ jobs:
           command: |
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382803030.dkr.ecr.us-east-1.amazonaws.com
             docker build -t 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest . 
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382803030.dkr.ecr.us-east-1.amazonaws.com
             docker push 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
 
   Run-image-as-Container:
@@ -78,3 +79,4 @@ workflows:
       - Run-image-as-Container:
           requires:
             - build-image-and-push-to-ecr
+
