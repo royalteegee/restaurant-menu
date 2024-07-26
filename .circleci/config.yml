@@ -60,7 +60,7 @@ jobs:
         - install_docker
         - add_ssh_keys:
             fingerprints:
-              - "your_ssh_key_fingerprint"
+              - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
             name: test-key.pem
             private_key: $YOUR_PRIVATE_KEY
         - run
