@@ -34,7 +34,7 @@ commands:
 jobs:
   build-image-and-push-to-ecr:
     machine: 
-      - image: ubuntu-2204:2022.04.2
+      image: ubuntu-2204:2022.04.2
     environment:
       DB_URI: $DB_URI
       PORT: $PORT
@@ -53,23 +53,32 @@ jobs:
             docker push 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
   Run-image-as-Container:
     machine:
-      - image: ubuntu-2204:2022.04.2
-      steps:
-        - checkout
-        - install_awscli
-        - install_docker
-        - add_ssh_keys:
-            fingerprints:
-              - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
-            name: test-key.pem
-            private_key: $YOUR_PRIVATE_KEY
-        - run:
-            name: Pull image from ECR
-            command: |
-              docker pull 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
-        - run:
-            name: Deploy Container
-            command: |
-              cat .circleci/ansible/inventory.txt
-              cd .circleci/ansible
-              ansible-playbook deploy_container.yml
+      image: ubuntu-2204:2022.04.2
+    steps:
+      - checkout
+      - install_awscli
+      - install_docker
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
+          name: test-key.pem
+          private_key: $YOUR_PRIVATE_KEY
+      - run:
+          name: Pull image from ECR
+          command: |
+            docker pull 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
+      - run:
+          name: Deploy Container
+          command: |
+            cat .circleci/ansible/inventory.txt
+            cd .circleci/ansible
+            ansible-playbook deploy_container.yml
+
+workflows:
+  default:
+  build-and-deploy:
+    jobs:
+      - build-image-and-push-to-ecr
+      - Run-image-as-Container:
+          requires:
+            - build-image-and-push-to-ecr
