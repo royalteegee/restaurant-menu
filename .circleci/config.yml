@@ -35,6 +35,9 @@ jobs:
     machine: 
       image: ubuntu-2204:2024.05.1
     environment:
+      AWS_SECRET_KEY: $AWS_SECRET_KEY
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      AWS_REGION: $AWS_REGION
       DB_URI: $DB_URI
       PORT: $PORT
       HOST: $HOST
