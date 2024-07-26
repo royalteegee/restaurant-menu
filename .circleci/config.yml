@@ -1,14 +1,14 @@
 version: 2.1
 commands:
-  install_awscli:
-    description: Install AWS CLI v2
+  configure_awscli:
+    description: Configure AWS credentials
     steps:
       - run:
-          name: Install AWS CLI v2
+          name: Configure AWS CLI
           command: |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set default.region us-east-1
 
   install_docker:
     description: Install docker and its packages
@@ -35,15 +35,13 @@ jobs:
     machine: 
       image: ubuntu-2204:2024.05.1
     environment:
-      AWS_SECRET_KEY: $AWS_SECRET_KEY
-      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-      AWS_REGION: $AWS_REGION
       DB_URI: $DB_URI
       PORT: $PORT
       HOST: $HOST
       SECRET_KEY: $SECRET_KEY
     steps:
       - checkout 
+      - configure_awscli
       - run:
           name: Login build and push to ECR
           command: |
