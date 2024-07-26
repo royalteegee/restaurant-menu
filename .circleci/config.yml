@@ -33,7 +33,7 @@ commands:
 jobs:
   build-image-and-push-to-ecr:
     machine: 
-      image: current
+      image: ubuntu-2204:2024.05.1
     environment:
       DB_URI: $DB_URI
       PORT: $PORT
@@ -52,7 +52,7 @@ jobs:
 
   Run-image-as-Container:
     machine:
-      image: current
+      image: ubuntu-2204:2024.05.1
     steps:
       - checkout
       - install_awscli
