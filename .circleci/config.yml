@@ -104,7 +104,7 @@ jobs:
             - docker-image
   push_image:
     docker:
-      - name: circleci/python:3.6.1
+      - image: circleci/python:3.6.1
       environment:
         AWS_DEFAULT_OUTPUT: json
       steps:
