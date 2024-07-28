@@ -44,7 +44,7 @@ jobs:
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com  
             docker push 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
 
-  Run-image-as-Container:
+  run-image-as-Container:
     machine:
       image: cimg/aws:2024.03
     steps:
@@ -72,3 +72,6 @@ workflows:
       - push_image:
           requires:
             - build
+      - run-image-as-Container:
+          requires:
+            - push_image
