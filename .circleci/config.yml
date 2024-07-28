@@ -120,7 +120,8 @@ jobs:
       - run:
           name: push image
           command: |
-            eval $(aws ecr get-login --region us-east-1 --no-include-email)
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com
+#            eval $(aws ecr get-login --region us-east-1 --no-include-email)
             docker push 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
 
 workflows:
