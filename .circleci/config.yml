@@ -111,7 +111,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - attach_workspace:
-          at: /workspace
+          at: workspace
       - run:
           name: Load image from archive
           command: docker load -i /workspace/docker-image/image.tar
