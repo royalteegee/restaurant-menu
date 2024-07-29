@@ -46,7 +46,7 @@ jobs:
 
   run-image-as-Container:
     machine:
-      image: cimg/aws:2024.03
+      - image: cimg/aws:2024.03
     steps:
       - checkout
       - add_ssh_keys:
