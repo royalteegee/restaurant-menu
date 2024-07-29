@@ -9,6 +9,15 @@
     image_tag: latest
 
   tasks:
+    - name: Login to ECR
+      shell:  >
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com
+
+    - name: Pull image from ECR
+      docker_image:
+        name: "{{ image_repository }}:{{ image_tag }}"
+        source: pull
+
     - name: Run the new container
       docker_container:
         name: "{{ container_name }}"
@@ -16,3 +25,4 @@
         state: started
         ports:
           - "80:5000"
+        restart_policy: always
