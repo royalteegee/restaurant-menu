@@ -9,11 +9,36 @@
     image_tag: latest
 
   tasks:
-    - name: Ensure AWS CLI is installed
-      package:
-        name: awscli
-        state: present
-          
+  #   - name: Install AWS CLI on Debian-based systems
+  #     apt:
+  #       name: awscli
+  #       state: present
+  #     when: ansible_os_family == "Debian"
+
+  #   - name: Install AWS CLI on RedHat-based systems
+  #     yum:
+  #       name: awscli
+  #       state: present
+  #     when: ansible_os_family == "RedHat"
+
+  #  - name: Install pip if not installed
+  #     apt:
+  #       name: python3-pip
+  #       state: present
+  #     when: ansible_os_family == "Debian"
+
+  #   - name: Install pip if not installed
+  #     yum:
+  #       name: python3-pip
+  #       state: present
+  #     when: ansible_os_family == "RedHat"
+
+  #   - name: Install AWS CLI using pip if not available via package manager
+  #     pip:
+  #       name: awscli
+  #       state: present
+  #     when: awscli_result.failed
+
     - name: Login to ECR
       environment:
         AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
