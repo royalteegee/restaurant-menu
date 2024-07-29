@@ -12,7 +12,7 @@
     - name: Run the new container
       docker_container:
         name: "{{ container_name }}"
-        image: "{{ image_repository }}:{{ image_image_tag }}"
+        image: "{{ image_repository }}:{{ image_tag }}"
         state: started
         ports:
           - "80:5000"

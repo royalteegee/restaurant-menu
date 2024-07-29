@@ -56,7 +56,7 @@ jobs:
           name: test-key.pem
           private_key: $YOUR_PRIVATE_KEY  
       - run:
-          name: Deploy Container
+          name: Rollback changes
           command: |
             sudo apt update
             sudo apt-get install ansible -y
