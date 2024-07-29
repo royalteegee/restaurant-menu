@@ -46,7 +46,7 @@
     #       - "80:5000"
     - name: Create default containers
       community.docker.docker_container:
-        name: "{{ container_name }}{{ item }}"
+        name: "{{ container_name }}"
         image: "{{ image_repository }}:{{ image_tag }}"
         command: "{{ default_container_command }}"
         state: present
