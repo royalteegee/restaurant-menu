@@ -1,5 +1,5 @@
 ---
-- name: Deploy updated Docker container from ECR
+- name: Delete existing container and image
   hosts: api-server
   become: yes
 
@@ -44,9 +44,9 @@
     #     state: started
     #     ports:
     #       - "80:5000"
-    - name: Create default containers
-      community.docker.docker_container:
-        name: "{{ container_name }}"
-        image: "{{ image_repository }}:{{ image_tag }}"
-        command: "{{ default_container_command }}"
-        state: present
+    # - name: Create default containers
+    #   community.docker.docker_container:
+    #     name: "{{ container_name }}"
+    #     image: "{{ image_repository }}:{{ image_tag }}"
+    #     command: "{{ default_container_command }}"
+    #     state: present
