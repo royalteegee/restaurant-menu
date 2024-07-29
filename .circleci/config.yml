@@ -64,7 +64,8 @@ jobs:
           name: Deploy Container
           command: |
             cat .circleci/ansible/inventory.txt
-            cd .circleci/ansible
+            cd .circleci/ansible  
+            sudo apt-get install ansible -y
             ansible-playbook deploy_container.yml -i inventory.txt
 
 workflows:
