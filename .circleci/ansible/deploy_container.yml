@@ -4,7 +4,7 @@
   become: yes
 
   vars:
-    container_name: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
+    container_name: api
     ecr_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test
     ecr_image_tag: latest
     aws_region: us-east-1
