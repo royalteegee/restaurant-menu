@@ -5,8 +5,9 @@
 
   vars:
     container_name: api
-    ecr_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test
-    ecr_image_tag: latest
+    ecr_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com
+    image_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test
+    image_tag: latest
     aws_region: us-east-1
 
   tasks:
@@ -24,9 +25,16 @@
 
     - name: Remove the Docker image
       docker_image:
-        name: "{{ ecr_repository }}:{{ ecr_image_tag }}"
+        name: "{{ image_repository }}:{{ image_tag }}"
         state: absent
       ignore_errors: yes
+
+    - name: Get ECR login command
+      command: aws ecr get-login-password --region {{ aws_region }}
+      register: ecr_login
+
+    - name: Login to ECR
+      shell: echo "{{ ecr_login.stdout }}" | docker login --username AWS --password-stdin {{ ecr_repository }}
 
     - name: Run the new container
       docker_container:
