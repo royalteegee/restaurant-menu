@@ -72,6 +72,6 @@ workflows:
       - push_image:
           requires:
             - build
-      - run-image-as-Container:
-          requires:
-            - push_image
+      # - run-image-as-Container:
+      #     requires:
+      #       - push_image

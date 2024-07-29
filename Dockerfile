@@ -15,7 +15,7 @@ RUN pip install --upgrade pip \
 COPY . /app/
 
 # Expose the port the application will run on
-EXPOSE 8000
+EXPOSE 5000
 
 # Command to run the application with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:server"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
