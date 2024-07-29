@@ -29,17 +29,20 @@
         state: absent
       ignore_errors: yes
 
-    - name: Get ECR login command
-      command: aws ecr get-login-password --region {{ aws_region }}
-      register: ecr_login
+    # - name: Get ECR login command
+    #   command: aws ecr get-login-password --region {{ aws_region }}
+    #   register: ecr_login
 
-    - name: Login to ECR
-      shell: echo "{{ ecr_login.stdout }}" | aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com
+    # - name: Login to ECR
+    #   shell: echo "{{ ecr_login.stdout }}" | aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com
 
-    - name: Run the new container
-      docker_container:
-        name: "{{ container_name }}"
-        image: "{{ ecr_repository }}:{{ ecr_image_tag }}"
-        state: started
-        ports:
-          - "80:5000"
+    # - name: Run the new container
+    #   docker_container:
+    #     name: "{{ container_name }}"
+    #     image: "{{ ecr_repository }}:{{ ecr_image_tag }}"
+    #     state: started
+    #     ports:
+    #       - "80:5000"
+
+    - name: Run Docker container from pulled image
+      command: docker run -d -p 80:5000 --name api 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest

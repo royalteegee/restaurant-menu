@@ -56,19 +56,16 @@ jobs:
           name: test-key.pem
           private_key: $YOUR_PRIVATE_KEY
       - run:
-          name: Configure AWS CLI
+          name: Pull Image
           command: |
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-            aws configure set default.region $AWS_DEFAULT_REGION
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com  
+            docker pull 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest  
       - run:
           name: Deploy Container
           command: |
-            cat .circleci/ansible/inventory.txt
             cd .circleci/ansible  
             sudo apt update  
             sudo apt-get install ansible -y
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com  
             ansible-playbook deploy_container.yml -i inventory.txt
 
 workflows:
