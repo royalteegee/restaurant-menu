@@ -45,4 +45,5 @@
     #       - "80:5000"
 
     - name: Run Docker container from pulled image
-      command: docker run -d -p 80:5000 --name api 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
+      command: docker run -d --name api -p 80:5000 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
+
