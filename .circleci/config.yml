@@ -54,18 +54,23 @@ jobs:
           fingerprints:
             - "SHA256:5Gw2sTNMNrlI7TxOnXKwwZYCjb5/pKoaalOhHmqapTs"
           name: test-key.pem
-          private_key: $YOUR_PRIVATE_KEY
+          private_key: $YOUR_PRIVATE_KEY  
+      - run:
+          name: Deploy Container
+          command: |
+            sudo apt update
+            sudo apt-get install ansible -y
+            cd .circleci/ansible    
+            ansible-playbook rollback.yml -i inventory.txt
       - run:
           name: Pull Image
           command: |
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com  
-            docker pull 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest  
+            docker pull 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
       - run:
           name: Deploy Container
           command: |
-            cd .circleci/ansible  
-            sudo apt update  
-            sudo apt-get install ansible -y
+            cd .circleci/ansible
             ansible-playbook deploy_container.yml -i inventory.txt
 
 workflows:

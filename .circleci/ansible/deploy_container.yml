@@ -5,48 +5,14 @@
 
   vars:
     container_name: api
-    ecr_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com
     image_repository: 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test
     image_tag: latest
-    default_container_command: sleep 1d
-    aws_region: us-east-1
 
   tasks:
-    - name: Stop the running container
+    - name: Run the new container
       docker_container:
         name: "{{ container_name }}"
-        state: stopped
-      ignore_errors: yes
-
-    - name: Delete the container
-      docker_container:
-        name: "{{ container_name }}"
-        state: absent
-      ignore_errors: yes
-
-    - name: Remove the Docker image
-      docker_image:
-        name: "{{ image_repository }}:{{ image_tag }}"
-        state: absent
-      ignore_errors: yes
-
-    # - name: Get ECR login command
-    #   command: aws ecr get-login-password --region {{ aws_region }}
-    #   register: ecr_login
-
-    # - name: Login to ECR
-    #   shell: echo "{{ ecr_login.stdout }}" | aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 046504469503.dkr.ecr.us-east-1.amazonaws.com
-
-    # - name: Run the new container
-    #   docker_container:
-    #     name: "{{ container_name }}"
-    #     image: "{{ ecr_repository }}:{{ ecr_image_tag }}"
-    #     state: started
-    #     ports:
-    #       - "80:5000"
-    - name: Create default containers
-      community.docker.docker_container:
-        name: "{{ container_name }}"
-        image: "{{ image_repository }}:{{ image_tag }}"
-        command: "{{ default_container_command }}"
-        state: present
+        image: "{{ image_repository }}:{{ image_image_tag }}"
+        state: started
+        ports:
+          - "80:5000"
