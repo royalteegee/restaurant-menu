@@ -72,10 +72,10 @@ jobs:
 workflows:
   build-push:
     jobs:
-      # - build
-      # - push_image:
-      #     requires:
-      #       - build
-      - run-image-as-Container
-          # requires:
-          #   - push_image
+      - build
+      - push_image:
+          requires:
+            - build
+      - run-image-as-Container:
+          requires:
+            - push_image
