@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: circleci/golang:1.8
     environment:
-      DB_URI: '$DB_URI'
+      DB_URI: $'DB_URI'
       PORT: $PORT
       HOST: $HOST
       SECRET_KEY: $SECRET_KEY
@@ -72,6 +72,6 @@ workflows:
       - push_image:
           requires:
             - build
-      # - run-image-as-Container:
-      #     requires:
-      #       - push_image
+      - run-image-as-Container:
+          requires:
+            - push_image
