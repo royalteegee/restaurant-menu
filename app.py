@@ -8,7 +8,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
 
-engine = create_engine(os.getenv('DB_URI'))
+# engine = create_engine(os.getenv('DB_URI'))
+engine = create_engine('sqlite:///restaurant-menu.db')
 Base.metadata.bind = engine
 Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
