@@ -45,7 +45,7 @@ jobs:
             docker push 046504469503.dkr.ecr.us-east-1.amazonaws.com/cicd-test:latest
 
   run-image-as-Container:
-    machine:
+    docker:
       - image: cimg/aws:2024.03
     steps:
       - checkout
