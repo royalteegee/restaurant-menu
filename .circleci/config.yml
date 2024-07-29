@@ -65,15 +65,15 @@ jobs:
           command: |
             cat .circleci/ansible/inventory.txt
             cd .circleci/ansible
-            ansible-playbook deploy_container.yml
+            ansible-playbook deploy_container.yml -i inventory.txt
 
 workflows:
   build-push:
     jobs:
-      - build
-      - push_image:
-          requires:
-            - build
-      - run-image-as-Container:
-          requires:
-            - push_image
+      # - build
+      # - push_image:
+      #     requires:
+      #       - build
+      - run-image-as-Container
+          # requires:
+          #   - push_image
